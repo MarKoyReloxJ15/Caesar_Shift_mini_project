@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            color:rgb(43, 51, 49);
+            background-color: #ffffff;
+            background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+
+        }
+
+        .centered-div {
+            width: 300px;
+            height: 430px;
+            background-color: #1d2951;
+            background-image: linear-gradient(315deg, #1d2951 0%, #dbe7fc 74%);
+
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .centered-elements .elem{
+          margin: 10px 0;
+          
+        }
+
+        .lent #len{
+          max-width: 40%;
+        }
+
+        #myInput{
+          margin-left: 26px;
+          max-width: 40%;
+          
+        }
+
+        .btn{
+          max-width: 100%;
+          margin-top: 30px;
+          text-align: center;
+        }
+        #button{
+          cursor: pointer;
+        }
+        .res{
+            width: 80%;
+            height: 50px;
+            margin: 20% auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <title>Caesar Shift</title>
+</head>
+<body>
+
+   
+    <div class="centered-div">
+      <div class="centered-elements">
+      
+      <div class="inputtext elem">
+        <label for="myText">Text:</label>
+        <input type="text" id="myInput">
+      </div>
+
+        <div class="lent elem">
+          <label for="len">Length:</label>
+          <input type="number" id="len"/>
+        </div>
+       
+        <div class="chec elem">
+          <label for="myCheck" id="chek">Encrypt:</Label>
+            <input type="checkbox" id="myCheck" onclick="myFunction()">
+        </div>
+
+        
+      <div class="btn">
+        <button onclick="displayInput()" id="button">Display Input</button>
+      </div>
+
+
+     <div class="res">
+      
+      <p id="result"></p>
+     </div>
+       
+      
+
+      </div>      
+    </div>
+
+    <script>
+    // code for caesar shift came from https://www.30secondsofcode.org/js/s/caesar-cipher/
+    var decrypt;
+        const caesarCipher = (str, shift, decrypt) => {
+            const s = decrypt ? (26 - shift) % 26 : shift;
+            const n = s > 0 ? s : 26 + (s % 26);
+            return [...str]
+              .map((l, i) => {
+                const c = str.charCodeAt(i);
+                if (c >= 65 && c <= 90)
+                  return String.fromCharCode(((c - 65 + n) % 26) + 65);
+                if (c >= 97 && c <= 122)
+                  return String.fromCharCode(((c - 97 + n) % 26) + 97);
+                return l;
+              })
+              .join('');
+          };
+        
+          function myFunction() {
+            var checkBox = document.getElementById("myCheck");
+            var text = document.getElementById("chek");
+            if (checkBox.checked == true){
+                decrypt = true;
+                text.innerHTML = "Decrypt:";
+                
+            } else {
+                decrypt = false;
+                text.innerHTML = "Encrypt:";
+            }
+          }
+        
+        
+        
+                function displayInput(){                     
+                    var x = document.getElementById("myInput").value;
+                    var y = parseInt(document.getElementById("len").value, 10);                
+                document.getElementById("result").innerHTML = caesarCipher(x,y,decrypt); 
+                }
+        </script>
+    
+</body>
+</html>
