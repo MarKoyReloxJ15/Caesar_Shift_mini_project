@@ -65,6 +65,20 @@
             justify-content: center;
             align-items: center;
         }
+ /* Style for the lock icon */
+ #myCheck:checked + label::before {
+  content: "\1F513"; /* Unicode for unlock icon */
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* Style for the unlock icon */
+    #myCheck:not(:checked) + label::before {
+      content: "\1F512"; /* Unicode for lock icon */
+       
+        font-size: 24px;
+        cursor: pointer;
+    }
     </style>
     <title>Caesar Shift</title>
 </head>
@@ -85,8 +99,10 @@
         </div>
        
         <div class="chec elem">
-          <label for="myCheck" id="chek">Encrypt:</Label>
-            <input type="checkbox" id="myCheck" onclick="myFunction()">
+
+          <input type="checkbox" id="myCheck" style="display: none;" onclick="toggleCheckbox(); myFunction()">
+          <label for="myCheck" id="check">Encrypt</label>
+
         </div>
 
         
@@ -128,11 +144,11 @@
             var text = document.getElementById("chek");
             if (checkBox.checked == true){
                 decrypt = true;
-                text.innerHTML = "Decrypt:";
+                // text.innerHTML = "Decrypt:";
                 
             } else {
                 decrypt = false;
-                text.innerHTML = "Encrypt:";
+                // text.innerHTML = "Encrypt:";
             }
           }
         
@@ -143,6 +159,19 @@
                     var y = parseInt(document.getElementById("len").value, 10);                
                 document.getElementById("result").innerHTML = caesarCipher(x,y,decrypt); 
                 }
+
+
+                function toggleCheckbox() {
+                  
+    var checkbox = document.getElementById("myCheck");
+    var text = document.getElementById("check");
+    
+    if (checkbox.checked) {
+        text.innerHTML = "<span>Decrypt</span>"; // Add span to style text
+    } else {
+        text.innerHTML = "<span>Encrypt</span>"; // Add span to style text
+    }
+}
         </script>
     
 </body>
